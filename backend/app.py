@@ -1,7 +1,8 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 from SECRET_KEY import key
 from database import db_init
+from models import transaction
 
 # Init app
 app = Flask(__name__)
@@ -17,6 +18,20 @@ db_init(app)
 @app.route('/', methods=["GET"]) # Setting Route
 def index():
     return 'hello world' # Returning msg
+
+@app.route('/api/transactions', methods=["POST"]) # Setting Route
+def make_transaction():
+    pass
+    
+@app.route('/api/transactions/<currentUser>', methods=["GET"]) # Setting Route
+def get_transaction(currentUser):
+    all_transactions = transaction.query.filter_by(userName=currentUser).first() # Getting a singular image
+
+    if not all_transactions:
+        return jsonify({ "msg": "user not found" }), 404
+
+    return jsonify(all_transactions)
+    
 
 if __name__ == "__main__": # checking if the script is being executed or called
     app.run(debug=True) # running the app in debug mode
