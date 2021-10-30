@@ -26,7 +26,7 @@ class Block():
         return update_hash(self.previous_hash, self.number, self.data, self.nonce)
 
     def __str__(self):
-        return str(f"Block: {self.number}\nhash: {self.hash()}\nPrevious: {self.previous_hash}\nNonce: {self.nonce}")
+        return str(f"Block: {self.number}\nHash: {self.hash()}\nPrevious: {self.previous_hash}\nData: {self.data}\nNonce: {self.nonce}")
 
 class BlockChain():
     difficulty = 4
@@ -35,17 +35,14 @@ class BlockChain():
         self.chain = chain
 
     def add(self, block):
-        self.chain.append({
-            'hash': block.hash(),
-            'previous': block.previous_hash,
-            'number': block.number,
-            'data': block.data,
-            'nonce': block.nonce,
-        })
+        self.chain.append(block)
+
+    def remove(self, block):
+        self.chain.remove(block)
 
     def mine(self, block):
         try:
-            block.previous_hash = self.chain[-1].get('hash')
+            block.previous_hash = self.chain[-1].hash()
         except IndexError:
             pass
 
@@ -56,6 +53,14 @@ class BlockChain():
             else:
                 block.nonce += 1
 
+    def isValid(self):
+        for i in range(1, len(self.chain)):
+            if self.chain[i].previous_hash != self.chain[i-1].hash() or self.chain[:self.difficulty] == "0" * self.difficulty:
+                print("False")
+            
+            print("True")
+
+
 def main():
     blockchain = BlockChain()
     database = ["hello world", "What's up", "hello", "bye"]
@@ -65,8 +70,7 @@ def main():
         num+=1
         blockchain.mine(Block(data, num))
 
-    for block in blockchain.chain:
-        print(block)
-
+    print(blockchain.isValid())
+    
 if __name__ == "__main__":
     main()
