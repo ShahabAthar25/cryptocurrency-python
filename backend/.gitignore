@@ -1,0 +1,4 @@
+SECRET_KEY.py
+http.rest
+db.sqlite
+/__pycache__
