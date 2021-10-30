@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+SECRET_KEY.py
+http.rest
+db.sqlite
+/__pycache__
