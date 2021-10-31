@@ -65,10 +65,14 @@ def main():
     blockchain = BlockChain()
     database = ["hello world", "What's up", "hello", "bye"]
 
+
     num = 0
     for data in database:
         num+=1
         blockchain.mine(Block(data, num))
+
+    for block in blockchain.chain:
+        print(block)
 
     print(blockchain.isValid())
     
