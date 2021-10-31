@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
+from werkzeug.utils import secure_filename
+import datetime
 
 from SECRET_KEY import key
-from database import db_init
+from database import db_init, db
 from models import transaction
 
 # Init app
@@ -18,10 +20,6 @@ db_init(app)
 @app.route('/', methods=["GET"]) # Setting Route
 def index():
     return 'hello world' # Returning msg
-
-@app.route('/api/transactions', methods=["POST"]) # Setting Route
-def make_transaction():
-    pass
     
 @app.route('/api/transactions/<currentUser>', methods=["GET"]) # Setting Route
 def get_transaction(currentUser):

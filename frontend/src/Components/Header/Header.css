@@ -1,0 +1,28 @@
+.header {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 15px;
+}
+
+.header .headerLeft h1 {
+  font-style: italic;
+}
+
+.header .headerCenter ul {
+  list-style: none;
+}
+
+.header .headerCenter ul li {
+  display: inline;
+  margin-left: 30px;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.headerRight h2 {
+  display: inline;
+  margin-right: 30px;
+}
